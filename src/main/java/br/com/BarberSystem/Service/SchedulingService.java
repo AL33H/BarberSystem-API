@@ -25,6 +25,8 @@ public class SchedulingService {
                         METHODS
      */
 
+
+
     public Scheduling verifyIfExist(Long id) throws ObjectNotFoundException {
         return schedulingRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Agendamento não encontrado! ID: " + id));
