@@ -2,6 +2,9 @@ package br.com.BarberSystem.Service;
 
 
 import br.com.BarberSystem.DTO.Request.SchedulingDTO;
+import br.com.BarberSystem.Domain.Entity.Client;
+import br.com.BarberSystem.Domain.Entity.Employee;
+import br.com.BarberSystem.Domain.Entity.Jobs;
 import br.com.BarberSystem.Domain.Entity.Scheduling;
 import br.com.BarberSystem.Repository.SchedulingRepository;
 import br.com.BarberSystem.Util.Exception.ObjectNotFoundException;
@@ -44,18 +47,21 @@ public class SchedulingService {
     public Scheduling save(SchedulingDTO schedulingDTO) {
 
 
-
-        clientService.findById(schedulingDTO.getClient_id());
-        employeeService.findById(schedulingDTO.getService_id());
-        jobsService.findById(schedulingDTO.getService_id());
+        Client client = clientService.findById(schedulingDTO.getClient_id());
+        Employee employee = employeeService.findById(schedulingDTO.getService_id());
+        Jobs jobs = jobsService.findById(schedulingDTO.getService_id());
 
 
         Scheduling scheduling = new Scheduling();
 
-
-
-
-
+        scheduling.setClient(client);
+        scheduling.setEmployee(employee);
+        scheduling.setJobs(jobs);
+        scheduling.setData(schedulingDTO.getData());
+        scheduling.setTimesStart(schedulingDTO.getTimesStart());
+        scheduling.setTimesEnd(schedulingDTO.getTimesEnd());
+        scheduling.setPrice(schedulingDTO.getPrice());
+        scheduling.setStatus(schedulingDTO.getStatus());
 
         return repository.save(scheduling);
     }

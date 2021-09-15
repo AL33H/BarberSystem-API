@@ -49,7 +49,7 @@ public class JobsController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> save(@Valid @RequestBody JobsDTO jobsDTO){
-        Jobs jobs = this.service.save(jobsDTO);
+        Jobs jobs = service.save(jobsDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")

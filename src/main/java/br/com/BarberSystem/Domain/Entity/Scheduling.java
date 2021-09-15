@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
@@ -34,7 +34,7 @@ public class Scheduling implements Serializable {
     @OneToOne
     private Jobs jobs;
 
-    private LocalDateTime data;
+    private LocalDate data;
 
     private LocalTime timesStart;
 
@@ -42,7 +42,7 @@ public class Scheduling implements Serializable {
 
     private Double price;
 
-    private String Status;
+    private String status;
 
      /*
                         GETTER'S AND SETTER'S
@@ -80,19 +80,19 @@ public class Scheduling implements Serializable {
         this.jobs = jobs;
     }
 
-    public LocalDateTime getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(LocalDateTime data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public LocalTime getTimeStart() {
+    public LocalTime getTimesStart() {
         return timesStart;
     }
 
-    public void setTimeStart(LocalTime timesStart) {
+    public void setTimesStart(LocalTime timesStart) {
         this.timesStart = timesStart;
     }
 
@@ -113,11 +113,11 @@ public class Scheduling implements Serializable {
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     /*

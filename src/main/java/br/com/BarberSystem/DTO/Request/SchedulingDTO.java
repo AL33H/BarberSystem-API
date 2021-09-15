@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,21 +18,29 @@ public class SchedulingDTO {
 
     private long id;
 
+    @NotNull
     private long client_id;
 
+    @NotNull
     private long employee_id;
 
+    @NotNull
     private long service_id;
 
+    @NotNull
     private LocalDate data;
 
+    @NotNull
     private LocalTime timesStart;
 
+    @NotNull
     private LocalTime timesEnd;
 
+    @NotNull
     private Double price;
 
-    private String Status;
+    @NotNull
+    private String status;
 
     /*
                         GETTER'S AND SETTER'S
@@ -102,10 +111,10 @@ public class SchedulingDTO {
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 }
