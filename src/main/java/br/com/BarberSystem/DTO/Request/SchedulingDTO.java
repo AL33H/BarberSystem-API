@@ -1,7 +1,7 @@
-package br.com.BarberSystem.Controller.DTO.Request;
+package br.com.BarberSystem.DTO.Request;
 
 import br.com.BarberSystem.Domain.Entity.Client;
-import br.com.BarberSystem.Domain.Entity.Functionary;
+import br.com.BarberSystem.Domain.Entity.Employee;
 import br.com.BarberSystem.Domain.Entity.Service;
 
 
@@ -18,7 +18,7 @@ public class SchedulingDTO {
     private Client client;
 
     @NotEmpty(message = "Preenchimento obrigatório!")
-    private Functionary functionary;
+    private Employee employee;
 
     @NotEmpty(message = "Preenchimento obrigatório!")
     private Service service;

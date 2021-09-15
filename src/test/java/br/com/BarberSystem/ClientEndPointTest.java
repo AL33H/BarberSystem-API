@@ -2,22 +2,26 @@ package br.com.BarberSystem;
 
 import br.com.BarberSystem.Domain.Entity.Client;
 import br.com.BarberSystem.Repository.ClientRepository;
+import br.com.BarberSystem.Service.ClientService;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
-import org.mockito.stubbing.OngoingStubbing;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
+
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+
 import org.springframework.boot.web.server.LocalServerPort;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+
+import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -35,6 +39,10 @@ public class ClientEndPointTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+
+    @Autowired
+    private ClientService clientService;
 
 //    @TestConfiguration
 //    static class config{
@@ -61,6 +69,12 @@ public class ClientEndPointTest {
     public void getListClientsAndReturn401(){
     ResponseEntity<String> response = restTemplate.getForEntity("/clients",String.class);
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    public void PostClientAndReturn201(){
+        Client client = new Client(null,"Aleff","Santos", "Homen", "11/06/1994", "88123", "Tabuleiro do Norte");
+
     }
 
 

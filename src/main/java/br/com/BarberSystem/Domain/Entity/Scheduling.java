@@ -28,7 +28,7 @@ public class Scheduling implements Serializable {
     private Client client;
 
     @OneToOne
-    private Functionary functionary;
+    private Employee employee;
 
     @OneToOne
     private Service service;
@@ -66,12 +66,12 @@ public class Scheduling implements Serializable {
         this.client = client;
     }
 
-    public Functionary getFunctionary() {
-        return functionary;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setFunctionary(Functionary functionary) {
-        this.functionary = functionary;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public Service getService() {
@@ -115,7 +115,7 @@ public class Scheduling implements Serializable {
         return "Scheduling{" +
                 "id=" + id +
                 ", client=" + client +
-                ", functionary=" + functionary +
+                ", functionary=" + employee +
                 ", service=" + service +
                 ", localDateTime=" + localDateTime +
                 ", price=" + price +

@@ -1,10 +1,10 @@
 package br.com.BarberSystem.Controller;
 
 
-import br.com.BarberSystem.DTO.Request.ClientDTO;
-import br.com.BarberSystem.Domain.Entity.Client;
-import br.com.BarberSystem.Service.ClientService;
-
+import br.com.BarberSystem.DTO.Request.EmployeeDTO;
+import br.com.BarberSystem.Domain.Entity.Employee;
+import br.com.BarberSystem.Service.EmployeeService;
+import br.com.BarberSystem.Util.Exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,33 +16,36 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/clients")
-public class ClientController extends RuntimeException{
+@RequestMapping(value = "/employee")
+public class EmployeeController {
 
     /*
                         CONSTRUCTOR
      */
 
     @Autowired
-    private ClientService service;
+    private EmployeeService service;
 
     /*
                         ENDPOINTS HTTP
      */
 
 
+
+
     /*
                         GET
      */
 
+
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Client>> findAllClient(){
+    public ResponseEntity<List<Employee>> findAll(){
         return ResponseEntity.ok().body(service.listAll());
     }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Client> findbyId(@PathVariable Long id){
+    public ResponseEntity<Employee> findbyId(@PathVariable Long id) throws ObjectNotFoundException {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
@@ -51,12 +54,12 @@ public class ClientController extends RuntimeException{
      */
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@Valid @RequestBody ClientDTO clientDTO) {
-        Client client = service.save(clientDTO);
+    public ResponseEntity<Void> save(@Valid @RequestBody EmployeeDTO employeeDTO){
+        Employee employee = service.save(employeeDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(client.getId())
+                .buildAndExpand(employee.getId())
                 .toUri();
 
         return ResponseEntity.created(uri).build();
@@ -67,20 +70,20 @@ public class ClientController extends RuntimeException{
      */
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Client> update(@Valid @RequestBody ClientDTO clientDTO){
-        service.update(clientDTO);
+    public ResponseEntity<Void> update(@Valid @RequestBody EmployeeDTO employeeDTO){
+        service.update(employeeDTO);
         return ResponseEntity.noContent().build();
     }
+
+
 
     /*
                         DELETE
      */
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) throws ObjectNotFoundException {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }

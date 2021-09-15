@@ -1,9 +1,8 @@
-package br.com.BarberSystem.Controller.DTO.Request;
+package br.com.BarberSystem.DTO.Request;
 
 
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -12,7 +11,7 @@ import java.io.Serializable;
 
 @Builder
 @NoArgsConstructor
-public class FunctionaryDTO implements Serializable {
+public class EmployeeDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

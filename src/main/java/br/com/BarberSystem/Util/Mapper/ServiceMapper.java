@@ -1,6 +1,6 @@
 package br.com.BarberSystem.Util.Mapper;
 
-import br.com.BarberSystem.Controller.DTO.Request.ServiceDTO;
+import br.com.BarberSystem.DTO.Request.ServiceDTO;
 import br.com.BarberSystem.Domain.Entity.Service;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

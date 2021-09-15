@@ -1,9 +1,11 @@
 package br.com.BarberSystem.Service;
 
 
+import br.com.BarberSystem.DTO.Request.ClientDTO;
 import br.com.BarberSystem.Domain.Entity.Client;
 import br.com.BarberSystem.Repository.ClientRepository;
 import br.com.BarberSystem.Util.Exception.ObjectNotFoundException;
+import br.com.BarberSystem.Util.Mapper.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ public class ClientService {
      */
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientRepository repository;
 
 
     /*
@@ -26,12 +28,12 @@ public class ClientService {
      */
 
     public Client verifyIfExist(Long id) {
-        return  clientRepository.findById(id)
+        return  repository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado! ID: "+id));
     }
 
-    public Client saveClient(Client client){
-        return clientRepository.save(client);
+    public Client save(ClientDTO clientDTO){
+        return repository.save(ClientMapper.INSTANCE.toClient(clientDTO));
     }
 
     public Client findById(Long id) {
@@ -39,15 +41,16 @@ public class ClientService {
     }
 
     public List<Client> listAll() {
-        return clientRepository.findAll();
+        return repository.findAll();
     }
 
-    public void DeleteById(Long id) {
+    public void deleteById(Long id) {
         verifyIfExist(id);
-        clientRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
-    public Client updateById(Client client){
-        return clientRepository.saveAndFlush(client);
+    public Client update(ClientDTO clientDTO){
+        verifyIfExist(clientDTO.getId());
+        return repository.save(ClientMapper.INSTANCE.toClient(clientDTO));
     }
 }

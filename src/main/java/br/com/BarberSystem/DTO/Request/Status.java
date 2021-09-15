@@ -1,4 +1,4 @@
-package br.com.BarberSystem.Controller.DTO.Request;
+package br.com.BarberSystem.DTO.Request;
 
 public enum Status {
 

@@ -1,13 +1,10 @@
 package br.com.BarberSystem.Controller;
 
-import br.com.BarberSystem.Controller.DTO.Request.ClientDTO;
-
-import br.com.BarberSystem.Controller.DTO.Request.SchedulingDTO;
+import br.com.BarberSystem.DTO.Request.SchedulingDTO;
 import br.com.BarberSystem.Domain.Entity.Scheduling;
 
 import br.com.BarberSystem.Service.SchedulingService;
 import br.com.BarberSystem.Util.Exception.ObjectNotFoundException;
-import br.com.BarberSystem.Util.Mapper.ClientMapper;
 import br.com.BarberSystem.Util.Mapper.SchedulingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

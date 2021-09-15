@@ -1,6 +1,6 @@
 package br.com.BarberSystem.Controller;
 
-import br.com.BarberSystem.Controller.DTO.Request.ServiceDTO;
+import br.com.BarberSystem.DTO.Request.ServiceDTO;
 import br.com.BarberSystem.Domain.Entity.Service;
 import br.com.BarberSystem.Service.ServiceService;
 import br.com.BarberSystem.Util.Exception.ObjectNotFoundException;

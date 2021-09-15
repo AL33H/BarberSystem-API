@@ -11,7 +11,7 @@ import java.util.Objects;
 @Entity
 @Builder
 @NoArgsConstructor
-public class Functionary implements Serializable {
+public class Employee implements Serializable {
 
 
     private static final long serialVersionUID = 1L;
@@ -91,7 +91,7 @@ public class Functionary implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Functionary that = (Functionary) o;
+        Employee that = (Employee) o;
         return id == that.id;
     }
 
