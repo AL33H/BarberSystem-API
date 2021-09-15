@@ -49,7 +49,7 @@ public class SchedulingController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> save(@Valid @RequestBody SchedulingDTO schedulingDTO) {
-        Scheduling scheduling = service.save(SchedulingMapper.INSTANCE.toScheduling(schedulingDTO));
+        Scheduling scheduling = service.save(schedulingDTO);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()

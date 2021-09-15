@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
@@ -26,7 +27,7 @@ public class Scheduling implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne()
+    @OneToOne
     private Client client;
 
     @OneToOne
@@ -35,17 +36,14 @@ public class Scheduling implements Serializable {
     @OneToOne
     private Service service;
 
+    private LocalDateTime data;
 
-    @Column(nullable = false)
-    private LocalDateTime localDateTime;
+    private LocalTime timesStart;
 
+    private LocalTime timesEnd;
 
-    @Column(nullable = false)
     private Double price;
 
-
-    @Column(nullable = false)
-    @Size(max = 45)
     private String Status;
 
      /*
@@ -84,12 +82,28 @@ public class Scheduling implements Serializable {
         this.service = service;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public LocalDateTime getData() {
+        return data;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+
+    public LocalTime getTimeStart() {
+        return timesStart;
+    }
+
+    public void setTimeStart(LocalTime timesStart) {
+        this.timesStart = timesStart;
+    }
+
+    public LocalTime getTimesEnd() {
+        return timesEnd;
+    }
+
+    public void setTimesEnd(LocalTime timesEnd) {
+        this.timesEnd = timesEnd;
     }
 
     public Double getPrice() {
@@ -108,33 +122,8 @@ public class Scheduling implements Serializable {
         Status = status;
     }
 
-     /*
+    /*
                         METHODS
      */
 
-    @Override
-    public String toString() {
-        return "Scheduling{" +
-                "id=" + id +
-                ", client=" + client +
-                ", functionary=" + employee +
-                ", service=" + service +
-                ", localDateTime=" + localDateTime +
-                ", price=" + price +
-                ", Status='" + Status + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Scheduling that = (Scheduling) o;
-        return id == that.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

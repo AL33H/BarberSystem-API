@@ -22,6 +22,15 @@ public class SchedulingService {
     @Autowired
     private SchedulingRepository repository;
 
+    @Autowired
+    private ClientService clientService;
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    @Autowired
+    private ServiceService serviceService;
+
 
     /*
                         METHODS
@@ -32,7 +41,22 @@ public class SchedulingService {
                 .orElseThrow(() -> new ObjectNotFoundException("Agendamento não encontrado! ID: " + id));
     }
 
-    public Scheduling save(Scheduling scheduling) {
+    public Scheduling save(SchedulingDTO schedulingDTO) {
+
+
+
+        clientService.findById(schedulingDTO.getClient_id());
+        employeeService.findById(schedulingDTO.getService_id());
+        serviceService.findById(schedulingDTO.getService_id());
+
+
+        Scheduling scheduling = new Scheduling();
+
+
+
+
+
+
         return repository.save(scheduling);
     }
 

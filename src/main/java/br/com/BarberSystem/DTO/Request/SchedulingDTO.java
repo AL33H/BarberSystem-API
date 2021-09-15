@@ -1,34 +1,36 @@
 package br.com.BarberSystem.DTO.Request;
 
-import br.com.BarberSystem.Domain.Entity.Client;
-import br.com.BarberSystem.Domain.Entity.Employee;
-import br.com.BarberSystem.Domain.Entity.Service;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SchedulingDTO {
 
 
     private long id;
 
-    @NotEmpty(message = "Preenchimento obrigatório!")
-    private Client client;
+    private long client_id;
 
-    @NotEmpty(message = "Preenchimento obrigatório!")
-    private Employee employee;
+    private long employee_id;
 
-    @NotEmpty(message = "Preenchimento obrigatório!")
-    private Service service;
+    private long service_id;
 
-    private LocalDateTime localDateTime;
+    private LocalDate data;
+
+    private LocalTime timesStart;
+
+    private LocalTime timesEnd;
 
     private Double price;
 
-    @Size(min = 2, max = 45, message = "Tamanho entre 2 e 45 caracteres!")
-    @NotEmpty(message = "Preenchimento obrigatório!")
     private String Status;
 
     /*
@@ -43,36 +45,52 @@ public class SchedulingDTO {
         this.id = id;
     }
 
-    public Client getClient() {
-        return client;
+    public long getClient_id() {
+        return client_id;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClient_id(long client_id) {
+        this.client_id = client_id;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public long getEmployee_id() {
+        return employee_id;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployee_id(long employee_id) {
+        this.employee_id = employee_id;
     }
 
-    public Service getService() {
-        return service;
+    public long getService_id() {
+        return service_id;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setService_id(long service_id) {
+        this.service_id = service_id;
     }
 
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public LocalTime getTimesStart() {
+        return timesStart;
+    }
+
+    public void setTimesStart(LocalTime timesStart) {
+        this.timesStart = timesStart;
+    }
+
+    public LocalTime getTimesEnd() {
+        return timesEnd;
+    }
+
+    public void setTimesEnd(LocalTime timesEnd) {
+        this.timesEnd = timesEnd;
     }
 
     public Double getPrice() {
