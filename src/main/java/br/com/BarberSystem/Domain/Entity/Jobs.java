@@ -1,6 +1,5 @@
 package br.com.BarberSystem.Domain.Entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -12,8 +11,7 @@ import java.util.Objects;
 @Entity
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
-public class Service implements Serializable {
+public class Jobs implements Serializable {
 
     /*
                         ATTRIBUTES
@@ -75,8 +73,8 @@ public class Service implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Service service = (Service) o;
-        return id.equals(service.id);
+        Jobs jobs = (Jobs) o;
+        return id.equals(jobs.id);
     }
 
     @Override

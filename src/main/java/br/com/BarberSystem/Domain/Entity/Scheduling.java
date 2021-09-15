@@ -5,11 +5,9 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Objects;
 
 @Entity
 @Builder
@@ -34,7 +32,7 @@ public class Scheduling implements Serializable {
     private Employee employee;
 
     @OneToOne
-    private Service service;
+    private Jobs jobs;
 
     private LocalDateTime data;
 
@@ -74,12 +72,12 @@ public class Scheduling implements Serializable {
         this.employee = employee;
     }
 
-    public Service getService() {
-        return service;
+    public Jobs getJobs() {
+        return jobs;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setJobs(Jobs jobs) {
+        this.jobs = jobs;
     }
 
     public LocalDateTime getData() {

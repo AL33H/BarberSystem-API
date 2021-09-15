@@ -14,7 +14,4 @@ public abstract class SchedulingMapper {
 
     public abstract SchedulingDTO toSchedulingDTO(Scheduling scheduling);
 
-
-
-
 }

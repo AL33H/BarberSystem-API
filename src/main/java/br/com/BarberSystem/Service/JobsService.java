@@ -2,11 +2,11 @@ package br.com.BarberSystem.Service;
 
 
 
-import br.com.BarberSystem.DTO.Request.ServiceDTO;
-import br.com.BarberSystem.Domain.Entity.Service;
-import br.com.BarberSystem.Repository.ServiceRepository;
+import br.com.BarberSystem.DTO.Request.JobsDTO;
+import br.com.BarberSystem.Domain.Entity.Jobs;
+import br.com.BarberSystem.Repository.JobsRepository;
 import br.com.BarberSystem.Util.Exception.ObjectNotFoundException;
-import br.com.BarberSystem.Util.Mapper.ServiceMapper;
+import br.com.BarberSystem.Util.Mapper.JobsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -14,33 +14,33 @@ import java.util.List;
 
 
 @org.springframework.stereotype.Service
-public class ServiceService {
+public class JobsService {
     
     /*
                         CONSTRUCTOR'S
      */
     
     @Autowired
-    private ServiceRepository repository;
+    private JobsRepository repository;
     
     /*
                         METHODS
      */
 
-    public Service verifyIfExist(Long id) {
+    public Jobs verifyIfExist(Long id) {
         return  repository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Serviço não encontrado! ID: "+id ));
     }
 
-    public Service save(ServiceDTO serviceDTO){
-        return repository.save(ServiceMapper.INSTANCE.toService(serviceDTO));
+    public Jobs save(JobsDTO jobsDTO){
+        return repository.save(JobsMapper.INSTANCE.toService(jobsDTO));
     }
 
-    public Service findById(Long id){
+    public Jobs findById(Long id){
         return verifyIfExist(id);
     }
 
-    public List<Service> listAll() {
+    public List<Jobs> listAll() {
         return repository.findAll();
     }
 
@@ -49,8 +49,8 @@ public class ServiceService {
         repository.deleteById(id);
     }
 
-    public Service update(ServiceDTO serviceDTO){
-        verifyIfExist(serviceDTO.getId());
-        return repository.save(ServiceMapper.INSTANCE.toService(serviceDTO));
+    public Jobs update(JobsDTO jobsDTO){
+        verifyIfExist(jobsDTO.getId());
+        return repository.save(JobsMapper.INSTANCE.toService(jobsDTO));
     }
 }

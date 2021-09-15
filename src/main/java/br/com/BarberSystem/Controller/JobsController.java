@@ -1,9 +1,9 @@
 package br.com.BarberSystem.Controller;
 
 
-import br.com.BarberSystem.DTO.Request.ServiceDTO;
-import br.com.BarberSystem.Domain.Entity.Service;
-import br.com.BarberSystem.Service.ServiceService;
+import br.com.BarberSystem.DTO.Request.JobsDTO;
+import br.com.BarberSystem.Domain.Entity.Jobs;
+import br.com.BarberSystem.Service.JobsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +15,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/services")
-public class ServiceController {
+public class JobsController {
 
     /*
                         CONSTRUCTOR
      */
 
     @Autowired
-    private ServiceService service;
+    private JobsService service;
 
     /*
                         ENDPOINTS HTTP
@@ -33,12 +33,12 @@ public class ServiceController {
      */
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Service> findbyId(@PathVariable Long id){
+    public ResponseEntity<Jobs> findbyId(@PathVariable Long id){
         return ResponseEntity.ok().body(service.findById(id));
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Service>> findAll(){
+    public ResponseEntity<List<Jobs>> findAll(){
         return ResponseEntity.ok().body(service.listAll());
     }
 
@@ -48,12 +48,12 @@ public class ServiceController {
      */
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@Valid @RequestBody ServiceDTO serviceDTO){
-        Service service = this.service.save(serviceDTO);
+    public ResponseEntity<Void> save(@Valid @RequestBody JobsDTO jobsDTO){
+        Jobs jobs = this.service.save(jobsDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(serviceDTO.getId())
+                .buildAndExpand(jobsDTO.getId())
                 .toUri();
         return ResponseEntity.created(uri).build();
 
@@ -64,8 +64,8 @@ public class ServiceController {
      */
 
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody ServiceDTO serviceDTO){
-        service.update(serviceDTO);
+    public ResponseEntity<Void> update(@Valid @RequestBody JobsDTO jobsDTO){
+        service.update(jobsDTO);
         return ResponseEntity.noContent().build();
     }
 

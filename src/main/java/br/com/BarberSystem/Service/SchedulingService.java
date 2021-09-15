@@ -29,7 +29,7 @@ public class SchedulingService {
     private EmployeeService employeeService;
 
     @Autowired
-    private ServiceService serviceService;
+    private JobsService jobsService;
 
 
     /*
@@ -47,7 +47,7 @@ public class SchedulingService {
 
         clientService.findById(schedulingDTO.getClient_id());
         employeeService.findById(schedulingDTO.getService_id());
-        serviceService.findById(schedulingDTO.getService_id());
+        jobsService.findById(schedulingDTO.getService_id());
 
 
         Scheduling scheduling = new Scheduling();

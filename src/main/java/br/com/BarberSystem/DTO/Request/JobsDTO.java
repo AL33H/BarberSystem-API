@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Builder
 @NoArgsConstructor
-public class ServiceDTO implements Serializable {
+public class JobsDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
