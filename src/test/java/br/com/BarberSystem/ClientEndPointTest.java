@@ -71,11 +71,11 @@ public class ClientEndPointTest {
         Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
-    @Test
-    public void PostClientAndReturn201(){
-        Client client = new Client(null,"Aleff","Santos", "Homen", "11/06/1994", "88123", "Tabuleiro do Norte");
-
-    }
+//    @Test
+//    public void PostClientAndReturn201(){
+//        Client client = new Client(null,"Aleff","Santos", "Homen", "11/06/1994", "88123", "Tabuleiro do Norte");
+//
+//    }
 
 
 }

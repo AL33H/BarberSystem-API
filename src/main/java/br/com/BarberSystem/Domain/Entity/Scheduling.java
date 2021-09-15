@@ -1,5 +1,6 @@
 package br.com.BarberSystem.Domain.Entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Objects;
 @Entity
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Scheduling implements Serializable {
 
     private static final long serialVersionUID = 1L;

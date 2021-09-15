@@ -1,16 +1,16 @@
 package br.com.BarberSystem.Controller;
 
+
 import br.com.BarberSystem.DTO.Request.ServiceDTO;
 import br.com.BarberSystem.Domain.Entity.Service;
 import br.com.BarberSystem.Service.ServiceService;
-import br.com.BarberSystem.Util.Exception.ObjectNotFoundException;
-import br.com.BarberSystem.Util.Mapper.ServiceMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,46 +22,60 @@ public class ServiceController {
      */
 
     @Autowired
-    private ServiceService serviceService;
+    private ServiceService service;
 
     /*
-                        METHODS
+                        ENDPOINTS HTTP
+     */
+
+     /*
+                        GET
+     */
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public ResponseEntity<Service> findbyId(@PathVariable Long id){
+        return ResponseEntity.ok().body(service.findById(id));
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<Service>> findAll(){
+        return ResponseEntity.ok().body(service.listAll());
+    }
+
+
+     /*
+                        POST
      */
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public Service SaveService(@Valid @RequestBody ServiceDTO serviceDTO){
-        return serviceService.saveService(ServiceMapper.INSTANCE.toService(serviceDTO));
+    public ResponseEntity<Void> save(@Valid @RequestBody ServiceDTO serviceDTO){
+        Service service = this.service.save(serviceDTO);
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(serviceDTO.getId())
+                .toUri();
+        return ResponseEntity.created(uri).build();
+
     }
 
+    /*
+                        PUT
+     */
 
-    @RequestMapping(method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<List<Service>> findAllService(){
-        return ResponseEntity.ok().body(serviceService.listAll());
-    }
-
-
-
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<Service> findbyIdService(@PathVariable Long id) throws ObjectNotFoundException {
-        return ResponseEntity.ok().body(serviceService.findById(id));
-    }
-
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> DeleteByIdService(@PathVariable Long id) throws ObjectNotFoundException {
-        serviceService.DeleteById(id);
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+    public ResponseEntity<Void> update(@Valid @RequestBody ServiceDTO serviceDTO){
+        service.update(serviceDTO);
         return ResponseEntity.noContent().build();
     }
 
+    /*
+                        DELETE
+     */
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Service> UpdateService(@Valid @RequestBody ServiceDTO serviceDTO){
-        return ResponseEntity.ok().body(serviceService.updateById(ServiceMapper.INSTANCE.toService(serviceDTO)));
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
-
-
 }

@@ -30,9 +30,6 @@ public class EmployeeController {
                         ENDPOINTS HTTP
      */
 
-
-
-
     /*
                         GET
      */
@@ -74,8 +71,6 @@ public class EmployeeController {
         service.update(employeeDTO);
         return ResponseEntity.noContent().build();
     }
-
-
 
     /*
                         DELETE

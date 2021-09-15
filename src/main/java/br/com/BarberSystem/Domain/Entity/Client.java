@@ -1,6 +1,7 @@
 package br.com.BarberSystem.Domain.Entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,7 @@ import java.io.Serializable;
 
 @Entity
 @Builder
-@NoArgsConstructor
+@AllArgsConstructor
 public class Client implements Serializable{
 
 
@@ -52,15 +53,7 @@ public class Client implements Serializable{
                         CONSTRUCTOR'S
     */
 
-    public Client(Long id, String firstName, String lastName, String sex, String birthDate, String telephone, String city) {
-        Id = id;
-        FirstName = firstName;
-        LastName = lastName;
-        Sex = sex;
-        BirthDate = birthDate;
-        Telephone = telephone;
-        City = city;
-    }
+
 
     /*
                         GETTER'S AND SETTER'S
