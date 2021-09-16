@@ -14,7 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/services")
+@RequestMapping(value = "/jobs")
 public class JobsController {
 
     /*
