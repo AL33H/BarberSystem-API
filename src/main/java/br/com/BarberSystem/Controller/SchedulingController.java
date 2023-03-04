@@ -3,8 +3,6 @@ package br.com.BarberSystem.Controller;
 import br.com.BarberSystem.DTO.Request.SchedulingDTO;
 import br.com.BarberSystem.Domain.Entity.Scheduling;
 import br.com.BarberSystem.Service.SchedulingService;
-import br.com.BarberSystem.Util.Exception.ObjectNotFoundException;
-import br.com.BarberSystem.Util.Mapper.SchedulingMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,41 +13,29 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/scheduling")
+@RequestMapping(value = "v1/scheduling")
 public class SchedulingController {
 
-    /*
-                        CONSTRUCTOR
-     */
+    private final SchedulingService service;
+
     @Autowired
-    private SchedulingService service;
-
-    /*
-                        ENDPOINTS HTTP
-     */
-
-
-    /*
-                        GET
-     */
+    public SchedulingController(SchedulingService service) {
+        this.service = service;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Scheduling>> findAll(){
+    public ResponseEntity<List<Scheduling>> findAll() {
         return ResponseEntity.ok().body(service.listAll());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Scheduling> findbyId(@PathVariable Long id){
+    public ResponseEntity<Scheduling> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
-    /*
-                        POST
-     */
-
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> save(@Valid @RequestBody SchedulingDTO schedulingDTO) {
-        Scheduling scheduling = service.save(schedulingDTO);
+        service.save(schedulingDTO);
 
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -59,24 +45,15 @@ public class SchedulingController {
         return ResponseEntity.created(uri).build();
     }
 
-
-    /*
-                        PUT
-     */
-
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody SchedulingDTO schedulingDTO){
+    public ResponseEntity<Void> update(@Valid @RequestBody SchedulingDTO schedulingDTO) {
         service.update(schedulingDTO);
         return ResponseEntity.noContent().build();
     }
 
-    /*
-                        DELETE
-     */
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        service.DeleteById(id);
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

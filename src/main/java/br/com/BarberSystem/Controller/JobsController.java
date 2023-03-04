@@ -14,42 +14,29 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/jobs")
+@RequestMapping(value = "v1//jobs")
 public class JobsController {
 
-    /*
-                        CONSTRUCTOR
-     */
+    private final JobsService service;
 
     @Autowired
-    private JobsService service;
-
-    /*
-                        ENDPOINTS HTTP
-     */
-
-     /*
-                        GET
-     */
+    public JobsController(JobsService service) {
+        this.service = service;
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Jobs> findbyId(@PathVariable Long id){
+    public ResponseEntity<Jobs> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Jobs>> findAll(){
+    public ResponseEntity<List<Jobs>> findAll() {
         return ResponseEntity.ok().body(service.listAll());
     }
 
-
-     /*
-                        POST
-     */
-
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@Valid @RequestBody JobsDTO jobsDTO){
-        Jobs jobs = service.save(jobsDTO);
+    public ResponseEntity<Void> save(@Valid @RequestBody JobsDTO jobsDTO) {
+        service.save(jobsDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -59,23 +46,15 @@ public class JobsController {
 
     }
 
-    /*
-                        PUT
-     */
-
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody JobsDTO jobsDTO){
+    public ResponseEntity<Void> update(@Valid @RequestBody JobsDTO jobsDTO) {
         service.update(jobsDTO);
         return ResponseEntity.noContent().build();
     }
 
-    /*
-                        DELETE
-     */
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        service.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }

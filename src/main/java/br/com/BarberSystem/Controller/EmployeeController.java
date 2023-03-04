@@ -16,42 +16,29 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/employee")
+@RequestMapping(value = "v1/employee")
 public class EmployeeController {
 
-    /*
-                        CONSTRUCTOR
-     */
+    private final EmployeeService service;
 
     @Autowired
-    private EmployeeService service;
-
-    /*
-                        ENDPOINTS HTTP
-     */
-
-    /*
-                        GET
-     */
-
+    public EmployeeController(EmployeeService service) {
+        this.service = service;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Employee>> findAll(){
+    public ResponseEntity<List<Employee>> findAll() {
         return ResponseEntity.ok().body(service.listAll());
     }
 
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Employee> findbyId(@PathVariable Long id) throws ObjectNotFoundException {
+    public ResponseEntity<Employee> findById(@PathVariable Long id) throws ObjectNotFoundException {
         return ResponseEntity.ok().body(service.findById(id));
     }
 
-    /*
-                        POST
-     */
-
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> save(@Valid @RequestBody EmployeeDTO employeeDTO){
+    public ResponseEntity<Void> save(@Valid @RequestBody EmployeeDTO employeeDTO) {
         Employee employee = service.save(employeeDTO);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -62,19 +49,11 @@ public class EmployeeController {
         return ResponseEntity.created(uri).build();
     }
 
-    /*
-                        PUT
-     */
-
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody EmployeeDTO employeeDTO){
+    public ResponseEntity<Void> update(@Valid @RequestBody EmployeeDTO employeeDTO) {
         service.update(employeeDTO);
         return ResponseEntity.noContent().build();
     }
-
-    /*
-                        DELETE
-     */
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) throws ObjectNotFoundException {

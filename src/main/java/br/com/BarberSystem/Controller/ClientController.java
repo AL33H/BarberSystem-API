@@ -4,7 +4,6 @@ package br.com.BarberSystem.Controller;
 import br.com.BarberSystem.DTO.Request.ClientDTO;
 import br.com.BarberSystem.Domain.Entity.Client;
 import br.com.BarberSystem.Service.ClientService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,39 +15,25 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/clients")
-public class ClientController extends RuntimeException{
+@RequestMapping(value = "v1/clients")
+public class ClientController {
 
-    /*
-                        CONSTRUCTOR
-     */
+    private final ClientService service;
 
     @Autowired
-    private ClientService service;
-
-    /*
-                        ENDPOINTS HTTP
-     */
-
-
-    /*
-                        GET
-     */
+    public ClientController(ClientService service) {
+        this.service = service;
+    }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Client>> findAllClient(){
+    public ResponseEntity<List<Client>> findAllClient() {
         return ResponseEntity.ok().body(service.listAll());
     }
 
-
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Client> findbyId(@PathVariable Long id){
+    public ResponseEntity<Client> findById(@PathVariable Long id) {
         return ResponseEntity.ok().body(service.findById(id));
     }
-
-    /*
-                        POST
-     */
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> save(@Valid @RequestBody ClientDTO clientDTO) {
@@ -62,25 +47,15 @@ public class ClientController extends RuntimeException{
         return ResponseEntity.created(uri).build();
     }
 
-    /*
-                        PUT
-     */
-
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-    public ResponseEntity<Client> update(@Valid @RequestBody ClientDTO clientDTO){
+    public ResponseEntity<Client> update(@Valid @RequestBody ClientDTO clientDTO) {
         service.update(clientDTO);
         return ResponseEntity.noContent().build();
     }
 
-    /*
-                        DELETE
-     */
-
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }
